@@ -51,6 +51,13 @@
         <version>1.6.0</version>
     </dependency>
 
+    <dependency>
+        <groupId>atom</groupId>
+        <artifactId>atom</artifactId>
+        <version>1.0</version>
+        <scope>system</scope>
+        <systemPath>${project.basedir}/atom.jar</systemPath>
+    </dependency>
 </dependencies>
 
 </project>
