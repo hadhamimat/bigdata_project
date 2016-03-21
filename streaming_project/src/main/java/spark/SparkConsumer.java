@@ -37,7 +37,7 @@ public class SparkConsumer {
 
         //read data from kafka topic to direct stream ---->  RDD group
         HashSet<String> topicsSet = new HashSet<String>();
-        topicsSet.add("kafka");
+        topicsSet.add("topic_edf");
         HashMap<String, String> kafkaParams = new HashMap<String, String>();
         kafkaParams.put("metadata.broker.list",brokerList);
         JavaPairInputDStream<String, String> kafkaStream = KafkaUtils.createDirectStream(jssc, String.class, String.class, StringDecoder.class,StringDecoder.class, kafkaParams, topicsSet);
@@ -46,6 +46,7 @@ public class SparkConsumer {
         System.out.println("xxxxxxxxxx RESULT xxxxxxx");
         kafkaStream.print();
         System.out.println("xxxxxxxxxx RESULT xxxxxxx");
+
 
         jssc.start();
         jssc.awaitTermination();

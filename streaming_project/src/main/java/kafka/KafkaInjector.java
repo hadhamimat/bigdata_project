@@ -1,8 +1,8 @@
 package kafka;
 
 
-import dataInjaction.AtomConfiguration;
-import dataInjaction.AtomDataInjector;
+import dataInjection.AtomConfiguration;
+import dataInjection.AtomDataInjector;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -14,7 +14,6 @@ import v13.agents.Agent;
 
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Properties;
 
 public class KafkaInjector implements AtomDataInjector {
@@ -49,7 +48,6 @@ public class KafkaInjector implements AtomDataInjector {
 
     public void sendAgent(long ts, Agent a, Order o, PriceRecord pr) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Agent").append(";");
         sb.append(a.name).append(";");
         sb.append(a.cash).append(";");
         sb.append(o.obName).append(";");
@@ -68,8 +66,8 @@ public class KafkaInjector implements AtomDataInjector {
         sb.append(bestAskPrice).append(";");
         sb.append(bestBidPrice).append(";");
         sb.append(ts);
-        count++ ;
-        producer.send(new ProducerRecord<String, String>(topic,Integer.toString(count),sb.toString()));
+        //count++ ;
+        //producer.send(new ProducerRecord<String, String>(topic,Integer.toString(count),sb.toString()));
     }
 
 
@@ -78,8 +76,8 @@ public class KafkaInjector implements AtomDataInjector {
         StringBuilder sb = new StringBuilder();
         sb.append(o.toString()).append(";");
         sb.append(ts);
-        count++ ;
-        producer.send(new ProducerRecord<String, String>(topic,Integer.toString(count),sb.toString()));
+        //count++ ;
+        //producer.send(new ProducerRecord<String, String>(topic,Integer.toString(count),sb.toString()));
     }
 
 
@@ -97,8 +95,8 @@ public class KafkaInjector implements AtomDataInjector {
             sb.append(ob.bid.size() > 0 ? Long.valueOf(((LimitOrder) ob.bid.first()).price) : "0").append(";");
             sb.append(ob.lastFixedPrice != null ? Long.valueOf(ob.lastFixedPrice.price) : "0").append(";");
             sb.append(ts);
-            count++ ;
-            producer.send(new ProducerRecord<String, String>(topic,Integer.toString(count),sb.toString()));
+            //count++ ;
+            //producer.send(new ProducerRecord<String, String>(topic,Integer.toString(count),sb.toString()));
         }
     }
 
@@ -118,8 +116,8 @@ public class KafkaInjector implements AtomDataInjector {
             sb.append(ob.lastPriceOfDay).append(";");
             sb.append(ob.numberOfPricesFixed).append(";");
             sb.append(ts);
-            count++ ;
-            producer.send(new ProducerRecord<String, String>(topic,Integer.toString(count),sb.toString()));
+            //count++ ;
+            //producer.send(new ProducerRecord<String, String>(topic,Integer.toString(count),sb.toString()));
         }
     }
 
@@ -129,7 +127,7 @@ public class KafkaInjector implements AtomDataInjector {
         sb.append("Exec").append(";");
         sb.append(o.sender.name).append("-").append(o.extId).append(";");
         sb.append(ts);
-        count++ ;
-        producer.send(new ProducerRecord<String, String>(topic,Integer.toString(count),sb.toString()));
+        //count++ ;
+        //producer.send(new ProducerRecord<String, String>(topic,Integer.toString(count),sb.toString()));
     }
 }

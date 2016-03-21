@@ -1,4 +1,4 @@
-package dataInjaction;
+package dataInjection;
 
 import kafka.KafkaInjector;
 import org.apache.logging.log4j.Level;

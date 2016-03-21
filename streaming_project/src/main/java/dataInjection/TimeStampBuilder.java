@@ -1,4 +1,4 @@
-package dataInjaction;
+package dataInjection;
 
 import java.text.DateFormat;
 import java.text.ParseException;

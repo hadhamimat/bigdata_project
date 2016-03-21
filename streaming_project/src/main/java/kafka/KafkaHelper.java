@@ -56,10 +56,9 @@ public class KafkaHelper {
     }
 
     public void closeProducer() {
+
         producer.close();
     }
-
-
 
 
 
@@ -93,6 +92,7 @@ public class KafkaHelper {
     }
 
     public void closeConsumer(Consumer<String, String> cons) {
+
         cons.close();
     }
 

@@ -1,14 +1,11 @@
-package dataInjaction;
+package dataInjection;
 
 import v13.*;
 import v13.agents.Agent;
 
-import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
-import java.util.logging.Level;
 
 public class FileDataInjector implements AtomDataInjector {
 	
@@ -30,7 +27,7 @@ public class FileDataInjector implements AtomDataInjector {
 	public void sendAgent(long ts, Agent a, Order o, PriceRecord pr)
 			throws HadoopTutorialException {
 
-            System.out.println(a.name + ";" + a.cash + ";" + o.obName + ";" + a.getInvest(o.obName) + ";" + (pr != null?Long.valueOf(pr.price):"none"));
+            System.out.println(a.name + ";" + a.cash + ";" + o.obName + ";" + a.getInvest(o.obName) + ";" + (pr != null?Long.valueOf(pr.price):"none")+pr.timestamp);
 
 	}
 

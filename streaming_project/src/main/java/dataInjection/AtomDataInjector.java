@@ -1,4 +1,4 @@
-package dataInjaction;
+package dataInjection;
 
 import v13.Day;
 import v13.Order;
@@ -7,7 +7,6 @@ import v13.PriceRecord;
 import v13.agents.Agent;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  *

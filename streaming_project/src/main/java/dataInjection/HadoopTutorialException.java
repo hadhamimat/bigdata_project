@@ -1,4 +1,4 @@
-package dataInjaction;
+package dataInjection;
 
 public class HadoopTutorialException extends RuntimeException {
 	
