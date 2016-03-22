@@ -5,6 +5,7 @@ package spark;
  */
 
 import kafka.serializer.StringDecoder;
+import models.Consommation;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -42,11 +43,20 @@ public class SparkConsumer {
         kafkaParams.put("metadata.broker.list",brokerList);
         JavaPairInputDStream<String, String> kafkaStream = KafkaUtils.createDirectStream(jssc, String.class, String.class, StringDecoder.class,StringDecoder.class, kafkaParams, topicsSet);
 
-        //print result
-        System.out.println("xxxxxxxxxx RESULT xxxxxxx");
-        kafkaStream.print();
-        System.out.println("xxxxxxxxxx RESULT xxxxxxx");
+        //for each rdd
+        kafkaStream.foreachRDD(new VoidFunction<JavaPairRDD<String, String>>() {
+            public void call(JavaPairRDD<String, String> stringStringJavaPairRDD) throws Exception {
+                JavaRDD<Consommation> consommationJavaRDD = stringStringJavaPairRDD.map(new Function<Tuple2<String, String>, Consommation>() {
+                    public Consommation call(Tuple2<String, String> stringStringTuple2) throws Exception {
+                        return new Consommation(stringStringTuple2._2());
+                    }
+                });
 
+                // requete SQL
+                System.out.println(consommationJavaRDD.toString());
+
+            }
+        });
 
         jssc.start();
         jssc.awaitTermination();
