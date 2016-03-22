@@ -1,9 +1,11 @@
 package models;
 
+import java.io.Serializable;
+
 /**
  * Created by Hadhami on 21/03/2016.
  */
-public class Consommation {
+public class Consommation implements Serializable{
     private  String idClient;
     private  String ville;
     private double conso;

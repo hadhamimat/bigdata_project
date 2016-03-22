@@ -53,7 +53,8 @@ public class SparkConsumer {
                 });
 
                 // requete SQL
-                System.out.println(consommationJavaRDD.toString());
+                System.out.println("$$$$$$$$");
+                System.out.println(consommationJavaRDD.collect().toString());
 
             }
         });
