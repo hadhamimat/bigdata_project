@@ -44,8 +44,6 @@ public class KafkaInjector implements AtomDataInjector {
         //TODO
     }
 
-
-
     public void sendAgent(long ts, Agent a, Order o, PriceRecord pr) {
         StringBuilder sb = new StringBuilder();
         sb.append(a.name).append(";");
@@ -130,4 +128,6 @@ public class KafkaInjector implements AtomDataInjector {
         //count++ ;
         //producer.send(new ProducerRecord<String, String>(topic,Integer.toString(count),sb.toString()));
     }
+
+
 }

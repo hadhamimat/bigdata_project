@@ -4,6 +4,8 @@ package spark;
  * Created by Hadhami on 10/03/2016.
  */
 
+import kafka.KafkaHelper;
+import kafka.KafkaInjector;
 import models.Consommation;
 
 import org.apache.spark.SparkConf;
@@ -13,6 +15,7 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.VoidFunction;
 
+import org.apache.spark.sql.Row;
 import org.apache.spark.streaming.Durations;
 import org.apache.spark.streaming.api.java.JavaPairInputDStream;
 import org.apache.spark.streaming.api.java.JavaStreamingContext;
@@ -33,7 +36,7 @@ public class SparkConsumer {
     static public String brokerList = "ambari:6667,slave1:6667";
 
     public static void main(String[] args){
-        
+
         //Create spark config
         SparkConf sparkConf = new SparkConf().setAppName("kafkaStreaming");
         sparkConf = new SparkConf().setMaster("local[*]").setAppName("kafkaStreaming");
@@ -71,6 +74,15 @@ public class SparkConsumer {
                 // SQL Request
                 DataFrame consommateurs = sqlContext.sql("SELECT ville,sum(conso) as totalConso FROM Consommation group by ville ");
                 consommateurs.show();
+
+                // Inject SQL response into kafka
+                Row[] row = consommateurs.collect();
+                KafkaHelper helper = new KafkaHelper();
+                helper.createProducer();
+                for(Row r : row){
+                    helper.writeMessage(r.get(0) + ";" + r.get(1),"kafkaSQL");
+                }
+
 
             }
         });
